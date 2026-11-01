@@ -1,0 +1,203 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Fraunces", ui-serif, Georgia, "Times New Roman", serif;
+  --font-body: "Manrope", ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  --color-cream-50: #fbf8f1;
+  --color-cream-100: #f6f0e2;
+  --color-cream-200: #eee4cd;
+  --color-cream-300: #e1d3b4;
+
+  --color-forest-500: #57836a;
+  --color-forest-600: #40684f;
+  --color-forest-700: #2f513c;
+  --color-forest-800: #223e2d;
+  --color-forest-900: #17291e;
+  --color-forest-950: #0d1912;
+
+  --color-honey-100: #f8ecd0;
+  --color-honey-200: #f2dda6;
+  --color-honey-300: #e9ca77;
+  --color-honey-400: #ddb049;
+  --color-honey-500: #c9952f;
+  --color-honey-600: #a77922;
+  --color-honey-700: #80591c;
+
+  --color-bark-400: #a1876a;
+  --color-bark-500: #7d6248;
+  --color-bark-600: #614a33;
+  --color-bark-700: #4b3826;
+  --color-bark-800: #35291b;
+  --color-bark-900: #221a10;
+
+  --animate-marquee: marquee 36s linear infinite;
+  --animate-spin-slow: spin-slow 22s linear infinite;
+  --animate-floaty: floaty 7s ease-in-out infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @keyframes spin-slow {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes floaty {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-12px);
+    }
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-cream-50);
+  color: var(--color-bark-800);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-honey-300);
+  color: var(--color-forest-950);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-cream-100);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-cream-300);
+  border-radius: 999px;
+  border: 2px solid var(--color-cream-100);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-honey-400);
+}
+
+/* Fine film-grain texture over everything */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  pointer-events: none;
+  opacity: 0.032;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ─── Intro / entry animation ─── */
+@keyframes intro-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) rotate(-140deg);
+  }
+  55% {
+    opacity: 1;
+    transform: scale(1.14) rotate(9deg);
+  }
+  75% {
+    transform: scale(0.95) rotate(-2deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+@keyframes intro-letter-in {
+  from {
+    transform: translateY(118%) rotate(3deg);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+}
+@keyframes intro-line-x {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes intro-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes intro-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(221, 176, 73, 0.35);
+  }
+  50% {
+    box-shadow: 0 0 60px 12px rgba(221, 176, 73, 0.22);
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.anim-fade-up {
+  animation: fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.anim-fade-in {
+  animation: fade-in 0.35s ease both;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
